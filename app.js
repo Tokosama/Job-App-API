@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 //connectDb
 const connectDB = require('./db/connect')
+const authenticateUser = require('./middleware/authentication')
 
 //routers
 
@@ -19,7 +20,7 @@ app.use(express.json());
 // routes
 
 app.use('/api/v1/auth',authROuter)
-app.use('/api/v1/auth',jobsRouter)
+app.use('/api/v1/jobs',authenticateUser,jobsRouter)
 
 
 app.get('/', (req, res) => {
